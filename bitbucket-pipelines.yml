@@ -24,5 +24,3 @@ pipelines:
               - gradle
             script:
               - ./gradlew lint
-            artifacts:
-              - app/build/reports/**        # artifacts are files that are produced by a step https://support.atlassian.com/bitbucket-cloud/docs/use-artifacts-in-steps/
