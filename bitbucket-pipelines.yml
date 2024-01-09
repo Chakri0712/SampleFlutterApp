@@ -7,7 +7,7 @@ pipelines:
           max-time: 120
           size: 2x
           script:
-            - export ANDROID_SDK_ROOT=C:\Users\dilee\AppData\Local\Android\Sdk  # Replace with the actual path
+            - export ANDROID_SDK_ROOT=C:/Users/dilee/AppData/Local/Android/Sdk  # Replace with the actual path
             - flutter pub get
             - flutter analyze
             - flutter build apk
