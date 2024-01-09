@@ -9,6 +9,7 @@ pipelines:
           script:
             - curl -o sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
             - unzip sdk.zip
+            - ls
             - cd $PWD/sdk
             - export ANDROID_SDK_ROOT=$PWD
             - export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
