@@ -8,10 +8,10 @@ pipelines:
           size: 2x
           script:
             - curl -o sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
-            - unzip sdk.zip
+            - mkdir sdk
+            - unzip sdk.zip -d sdk
             - ls
-            - cd $PWD/sdk
-            - export ANDROID_SDK_ROOT=$PWD
+            - export ANDROID_SDK_ROOT=$PWD/sdk
             - export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
             - $ANDROID_SDK_ROOT/tools/bin/sdkmanager --licenses  # Use full path for sdkmanager
             - $ANDROID_SDK_ROOT/tools/bin/sdkmanager "platforms;android-33" "build-tools;33.0.0"
