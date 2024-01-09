@@ -1,3 +1,30 @@
+#image: fischerscode/flutter
+#
+#pipelines:
+#  branches:
+#    master:
+#      - step:
+#          max-time: 120
+#          size: 2x
+#          script:
+#            - curl -o sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+#            - mkdir sdk
+#            - unzip sdk.zip -d sdk
+#            - ls
+#            - export ANDROID_SDK_ROOT=$PWD/sdk
+#            - export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
+#            - $ANDROID_SDK_ROOT/tools/bin/sdkmanager --licenses  # Use full path for sdkmanager
+#            - $ANDROID_SDK_ROOT/tools/bin/sdkmanager "platforms;android-33" "build-tools;33.0.0"
+#            - flutter --version
+#            - flutter upgrade
+#            - flutter pub get
+#            - flutter analyze
+#            - flutter build apk
+#          trigger: automatic
+#          artifacts:
+#            - "build/app/output/apk/release/*"
+
+
 image: fischerscode/flutter
 
 pipelines:
@@ -7,14 +34,9 @@ pipelines:
           max-time: 120
           size: 2x
           script:
-            - curl -o sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
-            - mkdir sdk
-            - unzip sdk.zip -d sdk
-            - ls
-            - export ANDROID_SDK_ROOT=$PWD/sdk
-            - export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
-            - $ANDROID_SDK_ROOT/tools/bin/sdkmanager --licenses  # Use full path for sdkmanager
-            - $ANDROID_SDK_ROOT/tools/bin/sdkmanager "platforms;android-33" "build-tools;33.0.0"
+            - ls /opt/android-sdk
+            - export ANDROID_SDK_ROOT=/opt/android-sdk  # Use the path within the image
+            - export ANDROID_HOME=/opt/android-sdk
             - flutter --version
             - flutter upgrade
             - flutter pub get
@@ -23,3 +45,4 @@ pipelines:
           trigger: automatic
           artifacts:
             - "build/app/output/apk/release/*"
+
