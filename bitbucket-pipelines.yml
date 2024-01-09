@@ -9,10 +9,11 @@ pipelines:
           script:
             - curl -o sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
             - unzip sdk.zip
+            - cd $PWD/sdk
             - export ANDROID_SDK_ROOT=$PWD/sdk
             - export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
-            - $PATH/tools/bin/sdkmanager --licenses  # Use full path for sdkmanager
-            - $PATH/tools/bin/sdkmanager "platforms;android-33" "build-tools;33.0.0"
+            - $ANDROID_SDK_ROOT/tools/bin/sdkmanager --licenses  # Use full path for sdkmanager
+            - $ANDROID_SDK_ROOT/tools/bin/sdkmanager "platforms;android-33" "build-tools;33.0.0"
             - flutter --version
             - flutter upgrade
             - flutter pub get
