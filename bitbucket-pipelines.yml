@@ -25,7 +25,7 @@
 #            - "build/app/output/apk/release/*"
 
 
-image: fischerscode/flutter
+image: mobiledevops/flutter-sdk-image
 
 pipelines:
   branches:
@@ -35,7 +35,7 @@ pipelines:
           size: 2x
           script:
             - ls /opt/android-sdk
-            - export ANDROID_SDK_ROOT=/opt/android-sdk  # Use the path within the image
+            - export ANDROID_SDK_ROOT=/opt/android-sdk
             - export ANDROID_HOME=/opt/android-sdk
             - flutter --version
             - flutter upgrade
@@ -45,4 +45,5 @@ pipelines:
           trigger: automatic
           artifacts:
             - "build/app/output/apk/release/*"
+
 
