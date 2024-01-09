@@ -11,11 +11,13 @@ pipelines:
             - unzip sdk.zip
             - export ANDROID_SDK_ROOT=$PWD/sdk
             - export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
-            - yes | sdkmanager --licenses
-            - sdkmanager "platforms;android-33" "build-tools;33.0.0"  # Adjust versions as needed
+            - $ANDROID_SDK_ROOT/tools/bin/sdkmanager --licenses  # Use full path for sdkmanager
+            - $ANDROID_SDK_ROOT/tools/bin/sdkmanager "platforms;android-33" "build-tools;33.0.0"
             - flutter --version
             - flutter upgrade
             - flutter pub get
             - flutter analyze
             - flutter build apk
           trigger: automatic
+          artifacts:
+            - "build/app/output/apk/release/*"
