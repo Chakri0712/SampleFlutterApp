@@ -3,18 +3,18 @@ pipelines:
   default:
     branches:
       - master
-    scripts:
+    script:
       - install: flutter pub get
       - build: flutter build apk
       - test: flutter test
 
   # Manual build trigger
-  manual:
-    agent: any
-    scripts:
-      - install: flutter pub get
-      - build: flutter build apk
-      - test: flutter test
+#  manual:
+#    agent: any
+#    script:
+#      - install: flutter pub get
+#      - build: flutter build apk
+#      - test: flutter test
 
 artifacts:
   paths:
