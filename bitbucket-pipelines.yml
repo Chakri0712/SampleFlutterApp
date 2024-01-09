@@ -7,8 +7,8 @@ pipelines:
           max-time: 120
           size: 2x
           script:
-            - export ANDROID_SDK_ROOT=C:\Users\dilee\AppData\Local\Android\Sdk
-            - export ANDROID_HOME=C:\Users\dilee\AppData\Local\Android\Sdk
+            - export ANDROID_SDK_ROOT=/opt/android-sdk  # Use the path within the image
+            - export ANDROID_HOME=/opt/android-sdk
             - flutter --version
             - flutter upgrade
             - flutter pub get
