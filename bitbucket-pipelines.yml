@@ -1,24 +1,7 @@
+image: cirrusci/flutter
+
 pipelines:
-  # Automatic builds for master and develop branches
   default:
-    branches:
-      - master
-    script:
-      - install: flutter pub get
-      - build: flutter build apk
-      - test: flutter test
-
-  # Manual build trigger
-#  manual:
-#    agent: any
-#    script:
-#      - install: flutter pub get
-#      - build: flutter build apk
-#      - test: flutter test
-
-artifacts:
-  paths:
-    - build/app/outputs/apk/release/app-release.apk
-
-# (Optional) Environment variables for sensitive information
-# ... define variables and access them using $VAR_NAME in scripts
+        script:
+          - flutter packages get
+          - flutter test
