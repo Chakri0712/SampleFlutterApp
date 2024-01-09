@@ -1,10 +1,9 @@
-image: cirrusci/flutter:latest
+image: fischerscode/flutter
 
 pipelines:
   branches:
     master:
       - step:
-          max-time:
           size: 2x
           script:
             - flutter pub get
