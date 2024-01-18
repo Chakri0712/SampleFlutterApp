@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Sample Counter'),
+      home: const MyHomePage(title: 'Basic Counter'),
     );
   }
 }

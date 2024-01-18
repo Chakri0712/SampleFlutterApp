@@ -18,6 +18,32 @@
 #            - "build/app/outputs/apk/release/app-release.apk"
 
 
+#image: mobiledevops/flutter-sdk-image
+#
+#pipelines:
+#  branches:
+#    master:
+#      - step:
+#          max-time: 120
+#          size: 2x
+#          script:
+#            - ls
+#            - flutter --version
+#            - flutter upgrade
+#            - flutter pub get
+#            - flutter analyze
+#            - flutter build apk
+#          trigger: automatic
+#          artifacts:
+#            - "build/app/outputs/apk/release/app-release.apk"
+#          pipe: atlassian/aws-s3-deploy:1.6.0
+#          variables:
+#            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+#            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+#            AWS_DEFAULT_REGION: 'us-east-1'
+#            S3_BUCKET: 'flutterartifact/'
+#            LOCAL_PATH: 'build/app/outputs/apk/release/app-release.apk'
+
 image: mobiledevops/flutter-sdk-image
 
 pipelines:
@@ -36,11 +62,13 @@ pipelines:
           trigger: automatic
           artifacts:
             - "build/app/outputs/apk/release/app-release.apk"
-    script:
-      - pipe: atlassian/aws-s3-deploy:1.6.0
-        variables:
-          AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-          AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-          AWS_DEFAULT_REGION: 'us-east-1'
-          S3_BUCKET: 'flutterartifact'
-          LOCAL_PATH: 'build/app/outputs/apk/release/app-release.apk'
+
+      - step:
+          script:
+            - pipe: atlassian/aws-s3-deploy:1.6.0
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: 'us-east-1'
+                S3_BUCKET: 'flutterartifact'
+                LOCAL_PATH: 'build'
