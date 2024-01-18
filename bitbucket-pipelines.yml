@@ -1,4 +1,4 @@
-#image: fischerscode/flutter
+#image: mobiledevops/flutter-sdk-image
 #
 #pipelines:
 #  branches:
@@ -7,14 +7,7 @@
 #          max-time: 120
 #          size: 2x
 #          script:
-#            - curl -o sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
-#            - mkdir sdk
-#            - unzip sdk.zip -d sdk
 #            - ls
-#            - export ANDROID_SDK_ROOT=$PWD/sdk
-#            - export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
-#            - $ANDROID_SDK_ROOT/tools/bin/sdkmanager --licenses  # Use full path for sdkmanager
-#            - $ANDROID_SDK_ROOT/tools/bin/sdkmanager "platforms;android-33" "build-tools;33.0.0"
 #            - flutter --version
 #            - flutter upgrade
 #            - flutter pub get
@@ -22,7 +15,7 @@
 #            - flutter build apk
 #          trigger: automatic
 #          artifacts:
-#            - "build/app/output/apk/release/*"
+#            - "build/app/outputs/apk/release/app-release.apk"
 
 
 image: mobiledevops/flutter-sdk-image
@@ -35,8 +28,6 @@ pipelines:
           size: 2x
           script:
             - ls
-#            - export ANDROID_SDK_ROOT=/opt/android-sdk
-#            - export ANDROID_HOME=/opt/android-sdk
             - flutter --version
             - flutter upgrade
             - flutter pub get
@@ -45,5 +36,11 @@ pipelines:
           trigger: automatic
           artifacts:
             - "build/app/outputs/apk/release/app-release.apk"
-
-
+    script:
+      - pipe: atlassian/aws-s3-deploy:1.6.0
+        variables:
+          AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+          AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+          AWS_DEFAULT_REGION: 'us-east-1'
+          S3_BUCKET: 'flutterartifact'
+          LOCAL_PATH: 'build/app/outputs/apk/release/app-release.apk'
